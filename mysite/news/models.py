@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class News(models.Model):
@@ -9,6 +10,9 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now = True, verbose_name = 'Дата последнего изменеения')
     is_published = models.BooleanField(default = True, verbose_name = 'Опубликован')
     category = models.ForeignKey(to = 'Category', on_delete = models.PROTECT, null = True, verbose_name = 'Категория')
+    
+    def get_absolute_url(self):
+        return reverse(viewname = 'view_news', kwargs={'news_id': self.pk,})
     
     def __str__(self):
         return self.title
@@ -23,6 +27,10 @@ class Category(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse(viewname = 'category', kwargs={'category_id': self.pk,})
+    
     
     class Meta:
         verbose_name = 'Категория'
