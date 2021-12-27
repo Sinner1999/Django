@@ -1,5 +1,7 @@
 from django import forms
 from .models import News
+import re
+from django.core.exceptions import ValidationError
 
 class NewsForm(forms.ModelForm):
     
@@ -17,4 +19,8 @@ class NewsForm(forms.ModelForm):
     # content = forms.CharField(label = "Текст", widget = forms.Textarea(attrs = {"class": "form-control"}))
     # is_published = forms.BooleanField(label = "Опубликовано", initial = True, widget = forms.CheckboxInput(attrs = {"class": "form-check-input", "role": "switch"}))
     # category = forms.ModelChoiceField(queryset = Category.objects.all(), label = "Категория", empty_label = 'Choose category...', widget = forms.Select(attrs = {"class": "form-control"}))
-    
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match(r'\d', title):
+            raise ValidationError('Title is not started by digit')
+        return title
