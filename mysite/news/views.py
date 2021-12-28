@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import News, Category
 from .forms import NewsForm
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
     
 
 class HomeNews(ListView):
@@ -37,6 +37,11 @@ class ViewNews(DetailView):
     pk_url_kwarg = 'news_id'
     template_name = 'news/view_news_detail.html'
     context_object_name = 'news_item'
+    
+    
+class CreateNews(CreateView):
+    form_class = NewsForm
+    template_name = 'news/add_news.html'
 
 
 # Create your views here.
@@ -75,20 +80,20 @@ class ViewNews(DetailView):
     
 #     return render(request, 'news/view_news.html', content)
 
-def add_news(request):
+# def add_news(request):
     
-    if request.method == 'POST':
-        form = NewsForm(request.POST)
-        if form.is_valid():
-            # print(form.cleaned_data)
-            # News.objects.create(**form.cleaned_data)
-            news = form.save()
-            return redirect(news)
-    else:
-        form = NewsForm()
+#     if request.method == 'POST':
+#         form = NewsForm(request.POST)
+#         if form.is_valid():
+#             # print(form.cleaned_data)
+#             # News.objects.create(**form.cleaned_data)
+#             news = form.save()
+#             return redirect(news)
+#     else:
+#         form = NewsForm()
         
-    content = {
-        'form': form,
-    }
+#     content = {
+#         'form': form,
+#     }
     
-    return render(request, 'news/add_news.html', content)
+#     return render(request, 'news/add_news.html', content)
