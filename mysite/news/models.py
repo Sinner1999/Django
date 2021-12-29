@@ -10,6 +10,7 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now = True, verbose_name = 'Дата последнего изменеения')
     is_published = models.BooleanField(default = True, verbose_name = 'Опубликован')
     category = models.ForeignKey(to = 'Category', on_delete = models.PROTECT, null = True, verbose_name = 'Категория')
+    views = models.IntegerField(default = 0)
     
     def get_absolute_url(self):
         return reverse(viewname = 'view_news', kwargs={'news_id': self.pk,})
