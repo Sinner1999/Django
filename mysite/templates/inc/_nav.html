@@ -9,9 +9,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">HOME</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_news' %}">ADD MEWS</a>
-                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_news' %}">ADD NEWS</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
