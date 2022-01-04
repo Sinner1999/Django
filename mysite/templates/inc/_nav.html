@@ -15,6 +15,16 @@
                     </li>
                 {% endif %}
             </ul>
+            <span class="navbar-text">
+                {% if request.user.is_authenticated %}
+                    Hello. {{ request.user.username }}
+                    <a type="button" class="btn btn-warning" href="{% url 'logout' %}">LogOut</a>
+                {% else %}
+                    <a type="button" class="btn btn-secondary" href="{% url 'register' %}">Register</a>
+                    <a type="button" class="btn btn-warning" href="{% url 'login' %}">LogIn</a>
+                {% endif %}
+                Text
+            </span>
         </div>
     </div>
 </nav>
