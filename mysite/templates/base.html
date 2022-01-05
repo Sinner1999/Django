@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,7 +17,9 @@
 
             <div class="row">
 
-                {% block sidebar %}SIDEBAR{% endblock  %}
+                {% comment %} {% cache 60 sidebar %} {% endcomment %}
+                    {% block sidebar %}SIDEBAR{% endblock  %}
+                {% comment %} {% endcache %} {% endcomment %}
 
                 {% if messages %}
                     {% for message in messages %}

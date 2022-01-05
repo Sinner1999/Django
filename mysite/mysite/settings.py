@@ -140,3 +140,10 @@ INTERNAL_IPS = [
 ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+    }
+}
